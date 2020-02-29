@@ -1,16 +1,16 @@
-4
+8
 ##start
 start 0 0
 ##end
-end 1 1
-dead0 2 2
-dead1 3 3
-mid0 4 4
-mid1 5 5
-mid2 6 6
-start-dead0
-start-mid0
-mid0-dead0
-start-mid1
-mid1-mid2
-mid2-end
+end 2 2
+r1 100 000
+r2 100 100
+r3 100 200
+r4 200 000
+r5 200 100
+start-r1
+r1-r2
+r2-r3
+r1-r4
+r1-r5
+r5-end

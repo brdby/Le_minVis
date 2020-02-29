@@ -1,8 +1,6 @@
-import javafx.scene.control.TreeSortMode;
+package map;
 
 import java.util.HashSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 public class Node {
 
@@ -32,5 +30,9 @@ public class Node {
 
     public boolean addNode(Node n){
         return connectedNodes.add(n);
+    }
+
+    public HashSet<Node> getConnectedNodes(){
+        return connectedNodes;
     }
 }

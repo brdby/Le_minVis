@@ -1,28 +1,14 @@
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
+import map.Map;
+import parser.FileReader;
+import parser.MapParser;
+import renderer.LeFrame;
 
 public class Main {
 
     public static void main(String[] args){
-        Map map = MapParser.parseInput(readFile("map"));
+        Map map = MapParser.parseInput(FileReader.readFile("map"));
         System.out.println("Ok!");
+        LeFrame vis = new LeFrame("Visualizer", map);
     }
-
-    private static String readFile(String filePath)
-    {
-        StringBuilder contentBuilder = new StringBuilder();
-        try (Stream<String> stream = Files.lines( Paths.get(filePath), StandardCharsets.UTF_8))
-        {
-            stream.forEach(s -> contentBuilder.append(s).append("\n"));
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        return contentBuilder.toString();
-    }
-
 }
+

@@ -1,7 +1,9 @@
-import javafx.css.Match;
+package parser;
+
+import map.Map;
+import map.Node;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,9 +29,17 @@ public class MapParser {
             else if (str.matches("[a-zA-Z0-9]+ [0-9]+ [0-9]+")){
                Node node = parseNodeUtil(str);
                if (node == null) return null;
-               else nodes.put(node.getName(), node);
-               if (nextEnd) end = node;
-               else if (nextStart) start = node;
+               else {
+                   nodes.put(node.getName(), node);
+                   if (nextEnd) {
+                       end = node;
+                       nextEnd = false;
+                   }
+                   else if (nextStart){
+                       start = node;
+                       nextStart = false;
+                   }
+               }
             }
             else if (str.matches("[a-zA-Z0-9]+-[a-zA-Z0-9]+")){
                 if (!parseEdgeUtil(nodes, str)) return null;
