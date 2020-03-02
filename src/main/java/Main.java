@@ -12,6 +12,7 @@ public class Main {
         System.out.println("Ok!");
         EventQueue.invokeLater(() -> {
             LeFrame vis = new LeFrame("Visualizer", map);
+            vis.startSimulating();
         });
     }
 }

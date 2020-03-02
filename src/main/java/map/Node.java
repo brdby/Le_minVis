@@ -28,10 +28,6 @@ public class Node {
         return y*Map.getSCALE();
     }
 
-    public void setX(double x){this.x = x;}
-
-    public void setY(double y){this.y = y;}
-
     public boolean addEdge(Node n){
         return connectedNodes.add(n);
     }

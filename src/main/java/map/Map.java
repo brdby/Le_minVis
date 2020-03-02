@@ -22,7 +22,7 @@ public class Map {
         this.paths = paths;
 
         for (int i = 1; i <= this.antsCounter; i++){
-            ants.put("L"+i, new Ant("L"+i, start.getX(), start.getY(), start));
+            ants.put("L"+i, new Ant(start.getX(), start.getY(), start));
         }
     }
 

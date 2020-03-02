@@ -15,20 +15,25 @@ public class LeFrame extends JFrame {
 
     private static final long TURN_TIME = 2000;
 
+    private Map map;
     private LeMap jmap;
 
     public LeFrame(String name, Map map){
         super(name);
-        jmap = new LeMap(map);
+
+        this.jmap = new LeMap(map);
+        this.map = map;
+
         add(jmap);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screensize = kit.getScreenSize();
         setSize(screensize.width, screensize.height);
         setVisible(true);
+    }
 
-
-        //simulating turns
+    public void startSimulating(){
         Timer t = new Timer();
         t.schedule(new TimerTask() {
             private long period = TURN_TIME;
@@ -41,8 +46,8 @@ public class LeFrame extends JFrame {
                 paths.removeIf(path -> moveAnt(map.getAnts().get(path.getAnt()), path.getNode(), period));
 
                 while (map.getPaths().peek() != null && map.getPaths().peek().getTurn() <= period / TURN_TIME) {
-                        Path nextPath = map.getPaths().poll();
-                        paths.add(nextPath);
+                    Path nextPath = map.getPaths().poll();
+                    paths.add(nextPath);
                 }
 
 
