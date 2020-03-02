@@ -2,7 +2,6 @@ package map;
 
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Map {
@@ -12,7 +11,7 @@ public class Map {
     private final HashMap<String, Node> nodes;
     private final int antsCounter;
     private static int SCALE = 1;
-    private final HashSet<Ant> ants = new HashSet<>();
+    private final HashMap<String, Ant> ants = new HashMap<>();
     private final LinkedList<Path> paths;
 
     public Map(Node start, Node end, HashMap<String, Node> nodes, int antsCounter, LinkedList<Path> paths){
@@ -22,8 +21,8 @@ public class Map {
         this.antsCounter = antsCounter;
         this.paths = paths;
 
-        for (int i = 0; i < this.antsCounter; i++){
-            ants.add(new Ant(start.getX(), start.getY()));
+        for (int i = 1; i <= this.antsCounter; i++){
+            ants.put("L"+i, new Ant("L"+i, start.getX(), start.getY(), start));
         }
     }
 
@@ -44,7 +43,7 @@ public class Map {
         return antsCounter;
     }
 
-    public HashSet<Ant> getAnts() { return ants; }
+    public HashMap<String, Ant> getAnts() { return ants; }
 
     public static int getSCALE() {
         return SCALE;
@@ -52,5 +51,9 @@ public class Map {
 
     public static void setSCALE(int SCALE) {
         Map.SCALE = SCALE;
+    }
+
+    public LinkedList<Path> getPaths() {
+        return paths;
     }
 }

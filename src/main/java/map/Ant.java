@@ -2,13 +2,17 @@ package map;
 
 public class Ant {
 
+    private final String name;
     private int x;
     private int y;
+    private Node currentNode;
 
 
-    public Ant(int x, int y) {
+    public Ant(String name, int x, int y, Node currentNode) {
+        this.name = name;
         this.x = x;
         this.y = y;
+        this.currentNode = currentNode;
     }
 
     public int getY() {
@@ -26,4 +30,17 @@ public class Ant {
     public void setX(int x) {
         this.x = x;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Node getCurrentNode() {
+        return currentNode;
+    }
+
+    public void setCurrentNode(Node currentNode) {
+        this.currentNode = currentNode;
+    }
+
 }

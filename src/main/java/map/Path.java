@@ -2,22 +2,22 @@ package map;
 
 public class Path {
 
-    private final Node node1;
-    private final Node node2;
+    private final String ant;
+    private final Node node;
     private final int turn;
 
-    public Path(Node node1, Node node2, int turn) {
-        this.node1 = node1;
-        this.node2 = node2;
+    public Path(String ant, Node node, int turn) {
+        this.ant = ant;
+        this.node = node;
         this.turn = turn;
     }
 
-    public Node getNode1() {
-        return node1;
+    public String getAnt() {
+        return ant;
     }
 
-    public Node getNode2() {
-        return node2;
+    public Node getNode() {
+        return node;
     }
 
     public int getTurn() {

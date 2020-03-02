@@ -9,12 +9,12 @@ import java.awt.geom.Line2D;
 
 import static java.awt.RenderingHints.*;
 
-public class JMap extends JComponent {
+public class LeMap extends JComponent {
 
     private Map map;
     public final static int ROOM_SIZE = 20;
 
-    JMap(Map map){
+    LeMap(Map map){
         this.map = map;
     }
 
@@ -38,12 +38,8 @@ public class JMap extends JComponent {
 
         //rendering ants
         g.setColor(Color.black);
-        map.getAnts().forEach((ant) -> g.fillOval(ant.getX()+(ROOM_SIZE / 4),
+        map.getAnts().forEach((name , ant) -> g.fillOval(ant.getX()+(ROOM_SIZE / 4),
                 ant.getY()+(ROOM_SIZE / 4), ROOM_SIZE/2, ROOM_SIZE/2));
     }
-
-    public void moveAnt(int x, int y){
-    }
-
 
 }

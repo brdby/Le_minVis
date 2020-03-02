@@ -3,11 +3,10 @@ package parser;
 import map.Map;
 import map.Node;
 import map.Path;
-import renderer.JMap;
+import renderer.LeMap;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -117,7 +116,7 @@ public class MapParser {
         while (Math.sqrt(
                 (node2.getX() - node1.getX())*(node2.getX() - node1.getX()) +
                 (node2.getY() - node1.getY())*(node2.getY() - node1.getY()))
-                < JMap.ROOM_SIZE) {
+                < LeMap.ROOM_SIZE) {
             Map.setSCALE(Map.getSCALE()+10);
             }
         return true;
@@ -129,13 +128,13 @@ public class MapParser {
 
         while (match.find()){
             String path = match.group();
-            String node1, node2;
+            String ant, node2;
 
             Pattern node1reg = Pattern.compile("L[a-zA-Z0-9]+");
             Matcher node1match = node1reg.matcher(path);
 
             if (node1match.find()){
-                node1 = node1match.group().substring(1);
+                ant = node1match.group();
             } else return false;
 
             Pattern node2reg = Pattern.compile("-[a-zA-Z0-9]+");
@@ -145,7 +144,7 @@ public class MapParser {
                 node2 = node2match.group().substring(1);
             } else return false;
 
-            pathsList.add(new Path(nodes.get(node1), nodes.get(node2), turn));
+            pathsList.add(new Path(ant, nodes.get(node2), turn));
         }
 
         return true;
