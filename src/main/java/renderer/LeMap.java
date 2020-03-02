@@ -1,18 +1,16 @@
 package renderer;
 
 import map.Map;
-import map.Node;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
-
-import static java.awt.RenderingHints.*;
 
 public class LeMap extends JComponent {
 
     private Map map;
-    public final static int ROOM_SIZE = 20;
+    public final static int ROOM_SIZE = 100;
 
     LeMap(Map map){
         this.map = map;
@@ -34,12 +32,13 @@ public class LeMap extends JComponent {
 
 
         //rendering nodes
-        map.getNodes().forEach((name, node) -> g.fillOval(node.getX(), node.getY(), ROOM_SIZE, ROOM_SIZE));
+        map.getNodes().forEach((name, node) -> g2.draw(new Ellipse2D.Double(node.getX(), node.getY(), ROOM_SIZE, ROOM_SIZE) {
+        }));
 
         //rendering ants
         g.setColor(Color.black);
-        map.getAnts().forEach((name , ant) -> g.fillOval(ant.getX()+(ROOM_SIZE / 4),
-                ant.getY()+(ROOM_SIZE / 4), ROOM_SIZE/2, ROOM_SIZE/2));
+        map.getAnts().forEach((name , ant) -> g.fillOval((int)ant.getX()+(ROOM_SIZE / 4),
+                (int)ant.getY()+(ROOM_SIZE / 4), ROOM_SIZE/2, ROOM_SIZE/2));
     }
 
 }

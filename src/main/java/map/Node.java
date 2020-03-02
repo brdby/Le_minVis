@@ -5,8 +5,8 @@ import java.util.HashSet;
 public class Node {
 
     private final String name;
-    private int x;
-    private int y;
+    private double x;
+    private double y;
 
     private HashSet<Node> connectedNodes = new HashSet<>();
 
@@ -20,17 +20,17 @@ public class Node {
         return name;
     }
 
-    public int getX() {
+    public double getX() {
         return x*Map.getSCALE();
     }
 
-    public int getY() {
+    public double getY() {
         return y*Map.getSCALE();
     }
 
-    public void setX(int x){this.x = x;}
+    public void setX(double x){this.x = x;}
 
-    public void setY(int y){this.y = y;}
+    public void setY(double y){this.y = y;}
 
     public boolean addEdge(Node n){
         return connectedNodes.add(n);
