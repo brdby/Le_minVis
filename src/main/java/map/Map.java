@@ -1,21 +1,30 @@
 package map;
 
+
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 public class Map {
 
     private final Node start;
     private final Node end;
     private final HashMap<String, Node> nodes;
-    private final int ants;
+    private final int antsCounter;
     private static int SCALE = 1;
+    private final HashSet<Ant> ants = new HashSet<>();
+    private final LinkedList<Path> paths;
 
-    public Map(Node start, Node end, HashMap<String, Node> nodes, int ants){
+    public Map(Node start, Node end, HashMap<String, Node> nodes, int antsCounter, LinkedList<Path> paths){
         this.start = start;
         this.end = end;
         this.nodes = nodes;
-        this.ants = ants;
+        this.antsCounter = antsCounter;
+        this.paths = paths;
+
+        for (int i = 0; i < this.antsCounter; i++){
+            ants.add(new Ant(start.getX(), start.getY()));
+        }
     }
 
 
@@ -31,9 +40,11 @@ public class Map {
         return nodes;
     }
 
-    public int getAnts() {
-        return ants;
+    public int getAntsCounter() {
+        return antsCounter;
     }
+
+    public HashSet<Ant> getAnts() { return ants; }
 
     public static int getSCALE() {
         return SCALE;

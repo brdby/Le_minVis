@@ -2,9 +2,12 @@ package parser;
 
 import map.Map;
 import map.Node;
+import map.Path;
 import renderer.JMap;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,13 +20,18 @@ public class MapParser {
         int ants = 0;
         Node start = null, end = null;
         HashMap<String, Node> nodes = new HashMap<>();
+        LinkedList<Path> pathsList = new LinkedList<>();
 
         String[] strings = input.split("\n");
+        int strCounter = 0;
 
         for (String str : strings){
-            if (str.matches("[0-9]+"))  ants = Integer.parseInt(str);
+            strCounter++;
+            if (str.matches("")) break;
 
-            else if (str.substring(0, 2).equals("##")){
+            else if (str.matches("[0-9]+"))  ants = Integer.parseInt(str);
+
+            else if (str.length() >= 2 && str.substring(0, 2).equals("##")){
                 parseCommandUtil(str.substring(2));
             }
 
@@ -47,7 +55,14 @@ public class MapParser {
             }
         }
 
-        return new Map(start, end, nodes, ants);
+        int turn = 0;
+        for (int i = strCounter; i < strings.length; i++){
+            turn++;
+            String str = strings[i];
+            if (!parsePathUtil(str, nodes, pathsList, turn)) return null;
+        }
+
+        return new Map(start, end, nodes, ants, pathsList);
     }
 
     private static void parseCommandUtil(String command){
@@ -105,6 +120,34 @@ public class MapParser {
                 < JMap.ROOM_SIZE) {
             Map.setSCALE(Map.getSCALE()+10);
             }
+        return true;
+    }
+
+    private static boolean parsePathUtil(String pathes, HashMap<String, Node> nodes,  LinkedList<Path> pathsList, int turn){
+        Pattern regex = Pattern.compile("L[a-zA-Z0-9]+-[a-zA-Z0-9]+");
+        Matcher match = regex.matcher(pathes);
+
+        while (match.find()){
+            String path = match.group();
+            String node1, node2;
+
+            Pattern node1reg = Pattern.compile("L[a-zA-Z0-9]+");
+            Matcher node1match = node1reg.matcher(path);
+
+            if (node1match.find()){
+                node1 = node1match.group().substring(1);
+            } else return false;
+
+            Pattern node2reg = Pattern.compile("-[a-zA-Z0-9]+");
+            Matcher node2match = node2reg.matcher(path);
+
+            if (node2match.find()){
+                node2 = node2match.group().substring(1);
+            } else return false;
+
+            pathsList.add(new Path(nodes.get(node1), nodes.get(node2), turn));
+        }
+
         return true;
     }
 

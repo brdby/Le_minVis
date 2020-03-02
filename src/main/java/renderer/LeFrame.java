@@ -26,6 +26,6 @@ public class LeFrame extends JFrame {
                 jmap.moveAnt(1, 1);
                 jmap.repaint();
             }
-        }, 1000, 100);
+        }, 1000, 10);
     }
 }
